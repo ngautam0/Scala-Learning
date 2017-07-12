@@ -12,10 +12,14 @@ object BracketBalanceRecur{
     def isBalanced(expression : List[Char], openCount : Int = 0) : Int = {
       if(expression.isEmpty)
         openCount
+
       else if(expression.head == '(')
         isBalanced(expression.tail, openCount + 1)
-      else
+
+      else if (expression.head == ')' && openCount != 0)
         isBalanced(expression.tail, openCount - 1)
+
+      else -1
     }
   }
 }
