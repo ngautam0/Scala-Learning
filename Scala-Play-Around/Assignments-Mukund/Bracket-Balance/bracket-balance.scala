@@ -32,24 +32,21 @@ object BracketBalance {
           result = "Not Balanced"
         }
         else {
-
-          for(each <- expression){ // for each bracket in expression
-
-              if(opening.indexOf(each) >= 0){ // if its an opening bracket
-                  stack.push(each) // push to stack
-              }
-              else if (stack.length != 0 && opening.indexOf(stack.top) == closing.indexOf(each) ){
-                  // else if its a closing bracket and stack is not empty
-                  // a opening closing match found. pop the element
-                  stack.pop
-              }
-              else{ // it was a closing bracket.. but on stack top there was different opening bracket
-                result = "Not Balanced"
-                println(expression + " is " +result)
-                return
-              }
-
-          }
+          expression.map( each =>
+                if(opening.indexOf(each) >= 0){ // if its an opening bracket
+                    stack.push(each) // push to stack
+                }
+                else if (stack.length != 0 && opening.indexOf(stack.top) == closing.indexOf(each) ){
+                    // else if its a closing bracket and stack is not empty
+                    // a opening closing match found. pop the element
+                    stack.pop
+                }
+                else{ // it was a closing bracket.. but on stack top there was different opening bracket
+                  result = "Not Balanced"
+                  println(expression + " is " +result)
+                  return
+                }
+          )
           // at end of all scanning the stack should be empty.. other wise its not Balanced
           if(stack.length != 0)
             result = "Not Balanced"
